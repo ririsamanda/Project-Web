@@ -46,3 +46,8 @@ Route::middleware(['auth', 'karyawan'])->group(function () {
 Route::middleware(['auth', 'role:Admin,Karyawan'])->group(function () {
     Route::resource('pengiriman', PengirimanController::class);
 });
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('pengiriman', PengirimanController::class);
+});
