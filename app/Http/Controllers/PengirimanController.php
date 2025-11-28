@@ -64,3 +64,41 @@ class PengirimanController extends Controller
         return view('pengiriman.show', compact('pengiriman'));
     }
 }
+
+
+public function update(Request $request, $id)
+{
+    // VALIDASI
+    $request->validate([
+        'tanggal'       => 'required|date',
+        'pelanggan'     => 'required|string',
+        'alamat'        => 'required|string',
+        'produk_id'     => 'required|array|min:1',
+        'produk_id.*'   => 'required|integer|exists:produk,id',
+        'jumlah.*'      => 'required|integer|min:1',
+    ]);
+
+    // 1. Update data utama
+    $pengiriman = Pengiriman::findOrFail($id);
+    $pengiriman->update([
+        'tanggal'   => $request->tanggal,
+        'pelanggan' => $request->pelanggan,
+        'alamat'    => $request->alamat,
+        'catatan'   => $request->catatan,
+    ]);
+
+    // 2. Hapus semua detail lama
+    DetailPengiriman::where('pengiriman_id', $id)->delete();
+
+    // 3. Simpan ulang detail baru
+    foreach ($request->produk_id as $i => $produk) {
+        DetailPengiriman::create([
+            'pengiriman_id' => $id,
+            'produk_id'     => $produk,
+            'jumlah'        => $request->jumlah[$i],
+        ]);
+    }
+
+    return redirect()->route('pengiriman.index');
+}
+

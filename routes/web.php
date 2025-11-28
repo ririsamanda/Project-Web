@@ -34,6 +34,35 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::resource('produk', ProdukController::class);
 Route::resource('produksi', ProduksiController::class)->except(['edit','update','destroy']);
 Route::resource('pengiriman', PengirimanController::class);
+<<<<<<< HEAD
+Route::resource('pelanggan', App\Http\Controllers\PelangganController::class);
+Route::resource('karyawan', App\Http\Controllers\KaryawanController::class);
+Route::resource('rekap', App\Http\Controllers\RekapController::class)->only(['index','show']);
+
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::resource('produk', ProdukController::class);
+    Route::resource('karyawan', KaryawanController::class);
+});
+
+Route::middleware(['auth', 'karyawan'])->group(function () {
+    Route::resource('produksi', ProduksiController::class);
+});
+
+Route::middleware(['auth', 'role:Admin,Karyawan'])->group(function () {
+    Route::resource('pengiriman', PengirimanController::class);
+});
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('pengiriman', PengirimanController::class);
+});
+=======
 Route::resource('pelanggan', PelangganController::class);
 Route::resource('karyawan', KaryawanController::class);
 Route::resource('rekap', RekapController::class)->only(['index','show']);
+>>>>>>> 2ceda7d33b63bc30c942face2897bf1c886dcbb9
