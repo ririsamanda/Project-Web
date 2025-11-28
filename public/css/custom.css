@@ -1,0 +1,68 @@
+/* ===== CUSTOM GLOBAL STYLE ===== */
+
+body {
+    background-color: #f3f6fc;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Card shadow lembut */
+.card {
+    border-radius: 12px;
+    border: none;
+}
+
+.page-title {
+    font-weight: 700;
+    color: #1e4fa1;
+}
+
+/* Table header */
+.table-custom-head {
+    background: #e7efff;
+    color: #1b3e85;
+    font-weight: bold;
+}
+
+/* Table hover */
+.table-hover tbody tr:hover {
+    background-color: #f1f5ff;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #1e4fa1;
+    border-color: #1e4fa1;
+    border-radius: 8px;
+}
+
+.btn-primary:hover {
+    background-color: #163f82;
+}
+
+.btn-outline-primary {
+    border-radius: 8px;
+}
+
+/* Filter box */
+.form-control, .form-select {
+    border-radius: 8px;
+}
+
+/* Badge style */
+.badge {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+}
+
+/* Table radius */
+table {
+    border-radius: 12px !important;
+    overflow: hidden;
+}
+
+/* Responsive tweak */
+@media(max-width:768px){
+    .page-title{
+        font-size: 22px;
+    }
+}
