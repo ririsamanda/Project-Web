@@ -62,7 +62,9 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            // --- PERBAIKAN KRITIS DI SINI ---
+            // Mengarahkan Laravel untuk menggunakan Model Karyawan, bukan Model User bawaan
+            'model' => App\Models\Karyawan::class, 
         ],
 
         // 'users' => [

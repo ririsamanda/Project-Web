@@ -65,7 +65,7 @@
     <div class="container-fluid h-100">
         <div class="row h-100">
             
-            <!-- Sisi Kiri: Branding & Visual -->
+            <!-- Sisi Kiri: Branding -->
             <div class="col-md-6 d-none d-md-flex bg-admin position-relative">
                 <div class="decorative-circle"></div>
                 <div class="z-2">
@@ -92,15 +92,28 @@
                         <span class="badge bg-primary bg-opacity-10 text-primary mb-2 px-3 py-2 rounded-pill">Administrator Access</span>
                         <h2 class="fw-bold mt-2">Selamat Datang Kembali</h2>
                         <p class="text-muted">Silakan masukkan kredensial admin Anda.</p>
+                        
+                        <!-- Menampilkan Error Login -->
+                        @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul class="mb-0 list-unstyled">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
 
-                    <form action="#" method="POST">
-                        @csrf
+                    <!-- PERHATIKAN BARIS INI -->
+                    <form action="{{ route('login.admin.process') }}" method="POST">
+                        @csrf <!-- Token CSRF -->
+                        
                         <div class="mb-3">
-                            <label class="form-label fw-bold small text-muted">USERNAME / EMAIL</label>
+                            <label class="form-label fw-bold small text-muted">USERNAME</label>
                             <div class="input-group">
                                 <span class="input-group-text bg-light border-end-0"><i class="bi bi-person-lock"></i></span>
-                                <input type="text" class="form-control border-start-0" placeholder="admin@applekeroak.com">
+                                <input type="text" name="username" class="form-control border-start-0" placeholder="Username Admin" required autofocus>
                             </div>
                         </div>
 
@@ -108,7 +121,7 @@
                             <label class="form-label fw-bold small text-muted">PASSWORD</label>
                             <div class="input-group">
                                 <span class="input-group-text bg-light border-end-0"><i class="bi bi-key"></i></span>
-                                <input type="password" class="form-control border-start-0" placeholder="••••••••">
+                                <input type="password" name="password" class="form-control border-start-0" placeholder="••••••••" required>
                             </div>
                         </div>
 
@@ -118,8 +131,9 @@
                     </form>
 
                     <div class="text-center mt-4">
-                        <a href="{{ route('login.karyawan') }}" class="text-decoration-none text-muted small">
-                            <i class="bi bi-arrow-right-circle me-1"></i> Beralih ke Login Karyawan
+                        <!-- PERBAIKAN DI SINI: route('login.select') diganti route('login') -->
+                        <a href="{{ route('login') }}" class="text-decoration-none text-muted small"> 
+                            <i class="bi bi-arrow-left-circle me-1"></i> Kembali ke Menu Utama
                         </a>
                     </div>
                 </div>
